@@ -1,5 +1,5 @@
 const express = require("express");
-const routerPlayer = new express.Router();
+const routerPlayerCricket = new express.Router();
 const player = require("../models/player_loginModel");
 const cricket_match = require("../models/cricket/cricket_matchModel");
 const cricket_profile = require("../models/cricket/cricket_profileModel");
@@ -7,7 +7,7 @@ const cricket_profile = require("../models/cricket/cricket_profileModel");
 //player login 
 //player logout remaining
 
-routerPlayer.post("/player/cricket/addMatch", async(req,res)=>{
+routerPlayerCricket.post("/player/cricket/addMatch", async(req,res)=>{
     const match = {
         tournament_name:req.body.tournament_name,
         team_name_1: req.body.team_name_1,
@@ -31,9 +31,6 @@ routerPlayer.post("/player/cricket/addMatch", async(req,res)=>{
 
     const player_profile = await cricket_profile.findOne({player_id: match_details.player_id});
     
-
-//     database.ListCollectionNames().ToList().Contains("cap2");
-// if (collectionExists == false) {
     if(player_profile){
         const player_ID = player_profile._id;
         cricket_profile.findByIdAndUpdate(player_ID,{
@@ -46,7 +43,7 @@ routerPlayer.post("/player/cricket/addMatch", async(req,res)=>{
     .catch((err)=>{
         res.send(err);
     })
-}
+    }
     else{
         const newPlayer = new cricket_profile({
             player_id : req.body.player_id,
@@ -65,4 +62,4 @@ routerPlayer.post("/player/cricket/addMatch", async(req,res)=>{
 })
 
 
-module.exports = routerPlayer;
+module.exports = routerPlayerCricket;

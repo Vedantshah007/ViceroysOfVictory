@@ -26,9 +26,10 @@ const adminSchema = mongoose.Schema({
             type : String,
             required : true,
         },
-        token : {
+        admin_id : {
             type : String,
-            required : true
+            required : true,
+            unique : true
         }
 })
 

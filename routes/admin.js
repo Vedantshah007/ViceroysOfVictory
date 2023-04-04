@@ -7,7 +7,12 @@ const routerAdmin = new express.Router();
 
 routerAdmin.post("/admin/setAdmin",async(req,res)=>{
     console.log(req.body);
-    const admin = new adminModel(req.body);
+    const admin = new adminModel({
+        name : req.body.name,
+        email : req.body.email,
+        password:req.body.password,
+        admin_id : req.body.admin_id
+    });
     await admin.save()
     .then(() => {
         res.send(admin);
@@ -35,11 +40,11 @@ routerAdmin.post("/admin/setPlayer",async (req,res)=>{
             gender:req.body.gender,
             height:req.body.height,
             weight:req.body.weight,
-            token : req.body.token
+            player_id : req.body.player_id
         }
     )
 
-    if(await playerModel.findOne({email : req.body.email})){
+    if(await playerModel.findOne({player_id : req.body.player_id})){
         res.status(400).send("Player already exists");
     }
     else{

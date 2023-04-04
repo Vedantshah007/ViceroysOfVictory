@@ -44,9 +44,10 @@ const playerSchema = mongoose.Schema({
         type: Number,
         required : true
     },
-    token : {
+    player_id : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     }
 })
 
