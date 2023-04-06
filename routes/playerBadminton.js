@@ -24,7 +24,7 @@ routerPlayerBadminton.post("/player/badminton/addmatch", async(req,res)=>{
     const match_details = new badminton_match(match);
     await match_details.save()
     .then(() => {
-        console.log(("match saved"));
+        console.log("match saved");
     }).catch((err) => {
         return res.send(err);
     });
