@@ -40,11 +40,11 @@ routerAdmin.post("/admin/setPlayer",async (req,res)=>{
             gender:req.body.gender,
             height:req.body.height,
             weight:req.body.weight,
-            player_id : req.body.player_id
+            student_id : req.body.student_id
         }
     )
 
-    if(await playerModel.findOne({player_id : req.body.player_id})){
+    if(await playerModel.findOne({student_id : req.body.student_id})){
         res.status(400).send("Player already exists");
     }
     else{
