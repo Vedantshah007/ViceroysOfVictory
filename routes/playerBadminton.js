@@ -20,7 +20,6 @@ routerPlayerBadminton.post("/player/badminton/addmatch", async(req,res)=>{
     }
     console.log(match);
 
-
         const match_details = new badminton_match(match);
         await match_details.save()
         .then(() => {
@@ -40,7 +39,8 @@ routerPlayerBadminton.post("/player/badminton/addmatch", async(req,res)=>{
         });
         }
         else{
-            const winning_player = await badminton_profile.findOne({opponent_id : req.body.opponent_id})
+            console.log(req.body.opponent_id);
+            const winning_player = await badminton_profile.findOne({student_id : req.body.opponent_id})
             console.log(winning_player);
             const winning_id = winning_player._id
             await badminton_profile.findByIdAndUpdate(winning_id,{
@@ -96,7 +96,7 @@ routerPlayerBadminton.post("/player/badminton/addmatch", async(req,res)=>{
         })
         await newPlayer1.save()
         .then(()=>{
-            //res.send("new player added");
+            //("new player added");
         })
         .catch((err)=>{
             return res.send(err);
