@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const profile_Schema = mongoose.Schema({
-    player_id : {
-        type: String,
+    student_id : {
+        type: Number,
         required : true
     },
     player_name : {
@@ -16,5 +16,5 @@ const profile_Schema = mongoose.Schema({
     }
 })
 
-const profile_model = mongoose.model("table_tennis_profile",profile_Schema);
+const profile_model = mongoose.model("tt_profile",profile_Schema);
 module.exports = profile_model;

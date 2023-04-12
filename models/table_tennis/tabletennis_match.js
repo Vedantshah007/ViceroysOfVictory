@@ -6,15 +6,14 @@ const ttSchema = mongoose.Schema({
         type: String,
         required :true
     },
-    player_name:{
-        type: String,
-        required :true,
-        trim: true,
-    },
     opponent_name:{
         type: String,
         required :true,
         trim: true,
+    },
+    opponent_id:{
+        type: Number,
+        require: true
     },
     score_player1:{
         type: String,
@@ -27,17 +26,12 @@ const ttSchema = mongoose.Schema({
         default: "0"
     },
     winning_player:{
-        //winning player
-        type: String,
+        type: Boolean,
         required: true,
     },
-    player_id:{
-        //player id
-        type: String,
-        require: true
-    }
+
 })
 
-const ttModel = mongoose.model("table_tennis_match",ttSchema);
+const ttModel = mongoose.model("tt_match",ttSchema);
 
-module.exports = ttModel;
+module.exports = ttModel; 
