@@ -6,6 +6,8 @@ const routerPlayerBadminton = require("./routes/playerBadminton");
 const routerPlayerfootball = require("./routes/playerFootball");
 const routerPlayerTT = require("./routes/playerTabletennis");
 const routerView = require("./routes/viewPlayer");
+const routerPlayer = require("./routes/player");
+
 const app = express();
 
 app.use(express.json());
@@ -15,7 +17,8 @@ app.use(routerPlayerBadminton);
 app.use(routerPlayerfootball);
 app.use(routerPlayerTT);
 app.use(routerView);
-
+app.use(routerPlayer);
+ 
 app.get("/",(req,res)=>{
     res.send("hello");
 })

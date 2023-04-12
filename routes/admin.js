@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const adminModel = require("../models/admin_loginModel");
 const playerModel = require("../models/player_loginModel");
 require("dotenv").config();
-
+const auth = require("../authentication/admin_authentication");
 
 const routerAdmin = new express.Router();
 
@@ -39,7 +39,7 @@ routerAdmin.post("/admin/login",async (req,res)=>{
                 tokens : admin.tokens,
             })
             .then(()=>{
-                res.send("Admin login done")
+                res.send({admin,token})
             })
             .catch((err)=>{
                 res.status(404).send(err);
