@@ -26,11 +26,11 @@ const adminSchema = mongoose.Schema({
             type : String,
             required : true,
         },
-        admin_id : {
-            type : String,
-            required : true,
-            unique : true
-        }
+        tokens : [
+            {
+                tokens : String,
+            }
+        ],
 })
 
 const adminModel = mongoose.model("admin",adminSchema);
