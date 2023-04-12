@@ -6,15 +6,14 @@ const badmintonSchema = mongoose.Schema({
         type: String,
         required :true
     },
-    player_name:{
-        type: String,
-        required :true,
-        trim: true,
-    },
     opponent_name:{
         type: String,
         required :true,
         trim: true,
+    },
+    opponent_id:{
+        type: Number,
+        require: true
     },
     score_player1:{
         type: String,
@@ -27,15 +26,10 @@ const badmintonSchema = mongoose.Schema({
         default: "0"
     },
     winning_player:{
-        //winning player
-        type: String,
+        type: Boolean,
         required: true,
     },
-    player_id:{
-        //player id
-        type: String,
-        require: true
-    }
+
 })
 
 const badmintonModel = mongoose.model("badminton_match",badmintonSchema);

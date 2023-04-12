@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const profile_Schema = mongoose.Schema({
-    player_id : {
-        type: String,
+    student_id : {
+        type: Number,
         required : true
     },
     player_name : {

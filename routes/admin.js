@@ -1,7 +1,9 @@
 const express = require("express");
-//const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const adminModel = require("../models/admin_loginModel");
 const playerModel = require("../models/player_loginModel");
+require("dotenv").config();
+
 
 const routerAdmin = new express.Router();
 
@@ -11,7 +13,6 @@ routerAdmin.post("/admin/setAdmin",async(req,res)=>{
         name : req.body.name,
         email : req.body.email,
         password:req.body.password,
-        admin_id : req.body.admin_id
     });
     await admin.save()
     .then(() => {
@@ -23,7 +24,33 @@ routerAdmin.post("/admin/setAdmin",async(req,res)=>{
 })
 
 routerAdmin.post("/admin/login",async (req,res)=>{
-    
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try {
+        const admin = await adminModel.findOne({email : email});
+        console.log(admin);
+        console.log(admin.password);
+        if(admin.password === password){
+            console.log("gayu?");
+            const token = jwt.sign({"_id" : admin._id},"process.env.SECRET_KEY");
+            admin.tokens = admin.tokens.concat({tokens:token});
+            await adminModel.findByIdAndUpdate(admin._id,{
+                tokens : admin.tokens,
+            })
+            .then(()=>{
+                res.send("Admin login done")
+            })
+            .catch((err)=>{
+                res.status(404).send(err);
+            })
+        }
+        else{
+            res.status(404).send("incorrect password");
+        }
+    } catch (error) {
+        res.status(404).send(" User not found !!");
+    }
 })
 
 routerAdmin.post("/admin/logout",async (req,res)=>{
@@ -40,11 +67,11 @@ routerAdmin.post("/admin/setPlayer",async (req,res)=>{
             gender:req.body.gender,
             height:req.body.height,
             weight:req.body.weight,
-            player_id : req.body.player_id
+            student_id : req.body.student_id
         }
     )
 
-    if(await playerModel.findOne({player_id : req.body.player_id})){
+    if(await playerModel.findOne({student_id : req.body.student_id})){
         res.status(400).send("Player already exists");
     }
     else{
