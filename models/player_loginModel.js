@@ -44,11 +44,17 @@ const playerSchema = mongoose.Schema({
         type: Number,
         required : true
     },
-    player_id : {
-        type : String,
+    student_id : {
+        type : Number,
         required : true,
-        unique : true
-    }
+    },
+    tokens : [
+        {
+            token :{
+                type : String
+            }
+        }
+    ]
 })
 
 const playerModel = mongoose.model("player",playerSchema);

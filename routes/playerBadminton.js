@@ -2,9 +2,9 @@ const express = require("express");
 const routerPlayerBadminton = new express.Router();
 const badminton_match = require("../models/badminton/badminton_match");
 const badminton_profile = require("../models/badminton/badminton_profile");
+const auth = require("../authentication/admin_authentication")
 
-
-routerPlayerBadminton.post("/player/badminton/addmatch", async(req,res)=>{
+routerPlayerBadminton.post("/player/badminton/addmatch",auth, async(req,res)=>{
 
     const student_id_1 = await badminton_profile.findOne({student_id:req.body.student_id_1});
     const student_id_2= await badminton_profile.findOne({student_id:req.body.student_id_2});

@@ -33,6 +33,13 @@ const adminSchema = mongoose.Schema({
         ],
 })
 
+adminSchema.methods.toJSON = function (){
+    const admin = this;
+    const adminObj = admin.toObject();
+    delete adminObj.tokens;
+    return adminObj
+}
+
 const adminModel = mongoose.model("admin",adminSchema);
 
 module.exports = adminModel
